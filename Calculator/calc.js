@@ -1,5 +1,6 @@
 function start(expini = "") {
-    exp = expini;
+    var exp = expini;
+    var lastop;
     document.getElementById("text").innerHTML = exp;
     function prval(ope) {
         if (ope == "*" || ope == "/") {
@@ -82,12 +83,39 @@ function start(expini = "") {
                 }
             }
         }
-        return (stack[stack.length - 1].toString(10));
+        if (stack[stack.length - 1] > 0) {
+            return (stack[stack.length - 1].toString(10));
+        }
+        else {
+            return "(0" + stack[stack.length - 1].toString(10) + ")";
+        }
     }
     var ex = document.getElementsByClassName("button ex");
     for (var i = 0; i < ex.length; i++) {
         ex[i].addEventListener("click", function () {
-            exp = exp + this.innerHTML;
+            if (this.innerHTML != '-') {
+                if (this.innerHTML != "+" && this.innerHTML != "*" && this.innerHTML != "/") {
+                    exp = exp + this.innerHTML;
+                }
+                else {
+                    if (lastop == "-" && exp[exp.length - 1] != ")") {
+                        exp = exp + ")" + this.innerHTML;
+                    }
+                    else {
+                        exp = exp + this.innerHTML;
+                    }
+                    lastop = this.innerHTML;
+                }
+            }
+            else {
+                if (exp[exp.length - 1] == "+" || exp[exp.length - 1] == "*" || exp[exp.length - 1] == "/") {
+                    exp = exp + "(0-";
+                }
+                else {
+                    exp = exp + "+(0-";
+                }
+                lastop = "-";
+            }
             document.getElementById("text").innerHTML = exp.slice(-17);
         })
     }
@@ -100,8 +128,11 @@ function start(expini = "") {
     })
     document.getElementById("compute").addEventListener("click", function () {
         if (exp.length != 0) {
+            if (lastop == "-" && exp[exp.length - 1] != ")") {
+                exp = exp + ")";
+            }
             exp = evaluate(exp);
-            document.getElementById("text").innerHTML = exp;
+            document.getElementById("text").innerHTML = exp.slice(-17);
         }
     })
 }
