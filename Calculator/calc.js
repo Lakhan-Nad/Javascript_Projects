@@ -83,7 +83,7 @@ function start(expini = "") {
                 }
             }
         }
-        if (stack[stack.length - 1] > 0) {
+        if (stack[stack.length - 1] >= 0) {
             return (stack[stack.length - 1].toString(10));
         }
         else {
@@ -93,7 +93,7 @@ function start(expini = "") {
     var ex = document.getElementsByClassName("button ex");
     for (var i = 0; i < ex.length; i++) {
         ex[i].addEventListener("click", function () {
-            if (this.innerHTML != '-') {
+            if (this.innerHTML != "-") {
                 if (this.innerHTML != "+" && this.innerHTML != "*" && this.innerHTML != "/") {
                     exp = exp + this.innerHTML;
                 }
@@ -108,19 +108,27 @@ function start(expini = "") {
                 }
             }
             else {
-                if (exp[exp.length - 1] == "+" || exp[exp.length - 1] == "*" || exp[exp.length - 1] == "/") {
+                if (lastop == "-" && exp[exp.length - 1] != ")") {
+                    exp = exp + ")";
+                }
+                if (exp[exp.length - 1] == "+" || exp[exp.length - 1] == "*" || exp[exp.length - 1] == "/" || exp.length == 0) {
                     exp = exp + "(0-";
                 }
                 else {
                     exp = exp + "+(0-";
                 }
-                lastop = "-";
+                lastop = this.innerHTML;
             }
             document.getElementById("text").innerHTML = exp.slice(-17);
         })
     }
     document.getElementById("back").addEventListener("click", function () {
-        exp = exp.substring(0, exp.length - 1);
+        if (exp[exp.length - 1] != "-") {
+            exp = exp.substring(0, exp.length - 1);
+        }
+        else {
+            exp = exp.substring(0, exp.length - 3);
+        }
         document.getElementById("text").innerHTML = exp;
     })
     document.getElementById("clear").addEventListener("click", function () {
