@@ -1,0 +1,59 @@
+<!doctype html>
+<!doctype html>
+<html>
+
+<head>
+    <title>Blur Effect</title>
+    <link rel="stylesheet" type="text/css" href="external.css">
+</head>
+
+<body>
+    <div id="divout">
+        <div id="maintext" class="">
+            <u><i>BLOG SITE</i></u>
+            <br /><br />
+            THIS SITE IS MADE FOR WRITING SHORT STORIES AND POEMS.
+            <br /><br />
+            SHARE YOUR AMAZING IDEAS WITH US!!
+        </div>
+    </div>
+    <button id="button" class="btncls" onclick="togglefunc()">SHOW BLOGS</button>
+    <button id="newblog" class="btncls" onclick="addnew()">NEW BLOGS</button>
+    <div id="box" class="popup hide">
+        <button class="cross" onclick="togglefunc()">X</button>
+        <h1 id="heading"></h1>
+        <br />
+        <p id="content">
+        </p>
+        <h2 id="author">
+
+        </h2>
+    </div>
+    <div id="addbox" class="popup hide">
+        <button class="cross" onclick="addnew()">X</button>
+        <table cellspacing="10px">
+            <tr>
+                <td class="inputlabel">Heading:</td>
+                <td><input type="text" maxlength="100" style="width:400px" id="headingofblog" required></td>
+            </tr>
+            <tr>
+                <td class="inputlabel">Content:</td>
+                <td><textarea style="width:400px; height:400px" id="contentofblog" required></textarea></td>
+            </tr>
+            <tr>
+                <td class="inputlabel">Author:</td>
+                <td><input type="text" maxlength="60" style="width:400px" id="authorofblog"></td>
+            </tr>
+        </table>
+        <button class="blogbuttons" id="submitnew" onclick="addblog()">SUBMIT</button>
+        <button class="blogbuttons" id="resettonew" onclick="resetblog()">RESET</button>
+    </div>
+    <div id="changers" class="hide">
+        <button id="prev" class="change" onclick="previouscontent()">&lt;</button>
+        <button id="next" class="change" onclick="nextcontent()">&gt;</button>
+    </div>
+</body>
+<script type="text/javascript" src="new.js">
+</script>
+
+</html>
