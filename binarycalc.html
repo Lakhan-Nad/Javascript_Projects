@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            width: 33%;
+        }
+
+        #res {
+            background-color: lightgray;
+            height: 48px;
+            font-size: 20px;
+            border: 2px solid black;
+        }
+
+        button {
+            width: 25%;
+            height: 36px;
+            font-size: 18px;
+            margin: 0px;
+            float: left;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>Binary Calculator</title>
+</head>
+
+<body onload="func1()">
+    <div id="res"></div>
+    <div id="btns">
+        <button id="btn0" class='input' style="background-color:lightgreen; color:brown">0</button>
+        <button id="btn1" class='input' style="background-color:lightgreen; color:brown">1</button>
+        <button id="btnClr" style="background-color:darkgreen; color:white">C</button>
+        <button id="btnEql" style="background-color:darkgreen; color:white">=</button>
+        <button id="btnSum" class='input' style="background-color:black; color:red">+</button>
+        <button id="btnSub" class='input' style="background-color:black; color:red">-</button>
+        <button id="btnMul" class='input' style="background-color:black; color:red">*</button>
+        <button id="btnDiv" class='input' style="background-color:black; color:red">/</button>
+    </div>
+    <script>
+        function func1() {
+            var var1;
+            var op;
+            var var2;
+            var result = '';
+            var inputbtns = document.getElementsByClassName("input");
+            document.getElementById("res").textContent = result;
+            for (let i = 0; i < 6; i++) {
+                inputbtns[i].addEventListener("click", function () {
+                    result += this.textContent;
+                    document.getElementById("res").textContent = result;
+                })
+            }
+            document.getElementById("btnEql").addEventListener("click", function () {
+                var1 = result.match(/^[10]{1,}/);
+                var2 = result.match(/[10]{1,}$/);
+                op = result.match(/[^10]/);
+                var1 = parseInt(var1, 2);
+                var2 = parseInt(var2, 2);
+                if (op == "+")
+                    document.getElementById("res").textContent = result = parseInt(var1 + var2).toString(2);
+                else if (op == "-")
+                    document.getElementById("res").textContent = result = parseInt(var1 - var2).toString(2);
+                else if (op == "*")
+                    document.getElementById("res").textContent = result = parseInt(var1 * var2).toString(2);
+                else
+                    document.getElementById("res").textContent = result = parseInt(var1 / var2).toString(2);
+
+            })
+            document.getElementById("btnClr").addEventListener("click", function () {
+                result = '';
+                document.getElementById("res").textContent = result;
+            })
+        }
+    </script>
+</body>
+
+</html>
